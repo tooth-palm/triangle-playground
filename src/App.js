@@ -1,5 +1,5 @@
 import Canvas from "./Components/Canvas";
-import sketch from "./Components/sketch";
+import sketch from "./sketch";
 
 function App() {
   return (
