@@ -1,13 +1,16 @@
 const sketch = (p) => {
+  const canvasWidth = p.windowWidth * (4 / 5);
+
   p.setup = () => {
-    p.createCanvas(1000, 1000);
+    p.createCanvas(canvasWidth, canvasWidth);
     p.background(0);
     p.stroke(255, 100);
     p.fill(255, 5);
     p.noLoop();
   };
+
   p.draw = () => {
-    const diameter = 500;
+    const diameter = canvasWidth;
     let points = [];
     for (let i = 0; i < 3; i++) {
       const pt = getInitialPoint();
@@ -15,8 +18,8 @@ const sketch = (p) => {
     }
     for (let i = 0; i < diameter; i++) {
       points = points.map((pt) => {
-        pt.x = 500 + p.sin(p.radians(pt.degree)) * pt.diameter;
-        pt.y = 500 + p.cos(p.radians(pt.degree)) * pt.diameter;
+        pt.x = canvasWidth / 2 + p.sin(p.radians(pt.degree)) * pt.diameter;
+        pt.y = canvasWidth / 2 + p.cos(p.radians(pt.degree)) * pt.diameter;
         pt.diameter -= pt.shrinkSpeed;
         if (pt.diameter < 0) {
           pt.diameter = 0;
@@ -37,11 +40,12 @@ const sketch = (p) => {
       );
     }
   };
+
   const getInitialPoint = () => {
     const degree = p.random(360);
     const rotateSpeed = p.random(10);
     const shrinkSpeed = p.random(3);
-    const diameter = 400 + p.random(100);
+    const diameter = canvasWidth * (2 / 5) + p.random(canvasWidth / 10);
     const pt = {
       degree: degree,
       rotateSpeed: rotateSpeed,
