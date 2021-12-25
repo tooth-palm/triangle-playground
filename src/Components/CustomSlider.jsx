@@ -1,4 +1,5 @@
 import {
+  Box,
   Slider,
   SliderFilledTrack,
   SliderThumb,
@@ -12,7 +13,7 @@ const CustomSlider = (props) => {
   const [isHover, setIsHover] = useState(false);
   const [isPicked, setIsPicked] = useState(false);
   return (
-    <>
+    <Box>
       <Text>{props.label}</Text>
       <Slider
         defaultValue={props.default}
@@ -39,7 +40,7 @@ const CustomSlider = (props) => {
           <SliderThumb />
         </Tooltip>
       </Slider>
-    </>
+    </Box>
   );
 };
 
