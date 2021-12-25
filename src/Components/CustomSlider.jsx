@@ -8,7 +8,8 @@ import {
 import { useState } from "react";
 
 const CustomSlider = (props) => {
-  const [showTooltip, setShowTooltip] = useState(false);
+  const [isHover, setIsHover] = useState(false);
+  const [isPicked, setIsPicked] = useState(false);
   return (
     <Slider
       defaultValue={props.default}
@@ -16,10 +17,10 @@ const CustomSlider = (props) => {
       max={props.max}
       colorScheme="gray"
       onChange={(v) => props.setValue(v)}
-      onChangeStart={() => setShowTooltip(true)}
-      onChangeEnd={() => setShowTooltip(false)}
-      onMouseEnter={() => setShowTooltip(true)}
-      onMouseLeave={() => setShowTooltip(false)}
+      onChangeStart={() => setIsPicked(true)}
+      onChangeEnd={() => setIsPicked(false)}
+      onMouseEnter={() => setIsHover(true)}
+      onMouseLeave={() => setIsHover(false)}
     >
       <SliderTrack>
         <SliderFilledTrack />
@@ -29,7 +30,7 @@ const CustomSlider = (props) => {
         bg="gray.500"
         color="white"
         placement="top"
-        isOpen={showTooltip}
+        isOpen={isHover || isPicked}
         label={String(props.value)}
       >
         <SliderThumb />
