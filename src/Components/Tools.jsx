@@ -49,8 +49,19 @@ const Tools = (props) => {
     },
   ];
 
+  const changeValues = () => {
+    const newValues = {
+      strokeWeight: strokeWeight,
+      strokeAlpha: strokeAlpha,
+      fillAlpha: fillAlpha,
+      density1: density1,
+      density2: density2,
+    };
+    props.setValues(newValues);
+  };
+
   const RedrawButton = () => {
-    return <Button>Redraw</Button>;
+    return <Button onClick={changeValues}>Redraw</Button>;
   };
 
   return (

@@ -4,13 +4,14 @@ import { useEffect } from "react";
 const Canvas = (props) => {
   useEffect(() => {
     const sketch = (p) => {
-      const canvasWidth = p.windowWidth * (4 / 5);
+      const canvasWidth = 300;
 
       p.setup = () => {
         p.createCanvas(canvasWidth, canvasWidth);
         p.background(0);
-        p.stroke(255, 100);
-        p.fill(255, 5);
+        p.strokeWeight(props.values.strokeWeight);
+        p.stroke(255, props.values.strokeAlpha);
+        p.fill(255, props.values.fillAlpha);
         p.noLoop();
       };
 
@@ -48,8 +49,8 @@ const Canvas = (props) => {
 
       const getInitialPoint = () => {
         const degree = p.random(360);
-        const rotateSpeed = p.random(10);
-        const shrinkSpeed = p.random(3);
+        const rotateSpeed = p.random(props.values.density1);
+        const shrinkSpeed = p.random(props.values.density2);
         const diameter = canvasWidth * (2 / 5) + p.random(canvasWidth / 10);
         const pt = {
           degree: degree,
@@ -63,7 +64,7 @@ const Canvas = (props) => {
       };
     };
     new p5(sketch, document.getElementById("canvasArea"));
-  }, []);
+  }, [props.values]);
   return <></>;
 };
 
