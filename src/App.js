@@ -3,7 +3,6 @@ import { useState } from "react";
 import MediaQuery from "react-responsive";
 import Canvas from "./Components/Canvas";
 
-import CanvasArea from "./Components/CanvasArea";
 import Tools from "./Components/Tools";
 
 function App() {
@@ -19,32 +18,59 @@ function App() {
     <Flex flexDirection="column" h="100vh">
       <Box
         w="100%"
-        h={16}
+        h="10%"
         pl="4"
         display="flex"
         alignItems="center"
-        bg="tomato"
+        bg="teal.700"
       >
         <Text fontSize="2xl" color="white">
           Generative Art Playground
         </Text>
       </Box>
       <MediaQuery query="(min-width: 620px)">
-        <Flex w="100%" h="100%" alignItems="stretch">
-          <Box flexBasis={320} flexGrow={0} bg="purple">
+        <Flex w="100%" h="90%" alignItems="stretch">
+          <Box width="30%" bg="#333333">
             <Tools padding={5} setValues={setSketchValues} />
           </Box>
-          <Box flexGrow={1} bg="teal" id="canvasArea">
-            <Canvas values={sketchValues} />
+          <Box
+            width="70%"
+            py="5%"
+            bg="black"
+            display="flex"
+            flexWrap="wrap"
+            justifyContent="center"
+            alignItems="flex-start"
+            overflowY="scroll"
+          >
+            <Box
+              width="100%"
+              display="flex"
+              flexWrap="Wrap"
+              justifyContent="center"
+              id="canvasArea"
+            >
+              <Canvas values={sketchValues} />
+            </Box>
           </Box>
         </Flex>
       </MediaQuery>
       <MediaQuery query="(max-width: 620px)">
-        <Flex w="100%" h="100%" flexDirection="column">
-          <Box flexBasis="300" flexGrow={0} bg="teal" id="canvasArea">
-            <Canvas />
+        <Flex w="100%" h="90%" flexDirection="column" alignItems="stretch">
+          <Box
+            width="100%"
+            height="50%"
+            bg="black"
+            display="flex"
+            overflowX="scroll"
+            justifyContent="center"
+            alignItems="center"
+          >
+            <Box width="300px" display="flex" flexWrap="noWrap" id="canvasArea">
+              <Canvas values={sketchValues} />
+            </Box>
           </Box>
-          <Box flexGrow={1} bg="purple">
+          <Box height="50%" overflowY="scroll" bg="#333333">
             <Tools padding={10} setValues={setSketchValues} />
           </Box>
         </Flex>

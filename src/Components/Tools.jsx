@@ -61,7 +61,11 @@ const Tools = (props) => {
   };
 
   const RedrawButton = () => {
-    return <Button onClick={changeValues}>Redraw</Button>;
+    return (
+      <Button onClick={changeValues} colorScheme="teal">
+        Add Sketch
+      </Button>
+    );
   };
 
   return (

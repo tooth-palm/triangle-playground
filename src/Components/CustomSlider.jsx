@@ -14,12 +14,12 @@ const CustomSlider = (props) => {
   const [isPicked, setIsPicked] = useState(false);
   return (
     <Box>
-      <Text>{props.label}</Text>
+      <Text color="whiteAlpha.700">{props.label}</Text>
       <Slider
         defaultValue={props.default}
         min={props.min}
         max={props.max}
-        colorScheme="gray"
+        colorScheme="teal"
         onChange={(v) => props.setValue(v)}
         onChangeStart={() => setIsPicked(true)}
         onChangeEnd={() => setIsPicked(false)}
@@ -31,7 +31,7 @@ const CustomSlider = (props) => {
         </SliderTrack>
         <Tooltip
           hasArrow
-          bg="gray.500"
+          bg="teal.500"
           color="white"
           placement="top"
           isOpen={isHover || isPicked}
