@@ -23,6 +23,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "homepage":"https://hayashiinshiga.github.io/triangle-playground/",
   "eslintConfig": {
     "extends": [
       "react-app",
