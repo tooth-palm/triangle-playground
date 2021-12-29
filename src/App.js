@@ -56,7 +56,14 @@ function App() {
         </Flex>
       </MediaQuery>
       <MediaQuery query="(max-width: 620px)">
-        <Flex w="100%" h="90%" flexDirection="column" alignItems="stretch">
+        <Flex
+          w="100%"
+          h="90%"
+          overflowY="scroll"
+          flexDirection="column"
+          alignItems="stretch"
+          bg="#333333"
+        >
           <Box
             width="100%"
             height="50%"
@@ -70,7 +77,7 @@ function App() {
               <Canvas values={sketchValues} />
             </Box>
           </Box>
-          <Box height="50%" overflowY="scroll" bg="#333333">
+          <Box height="50%" bg="#333333">
             <Tools padding={10} setValues={setSketchValues} />
           </Box>
         </Flex>
