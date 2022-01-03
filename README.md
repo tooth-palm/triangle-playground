@@ -1,70 +1,89 @@
-# Getting Started with Create React App
+# Generative Art Playground
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## [Try It On GitHub Pages](https://hayashiinshiga.github.io/triangle-playground/)
 
-## Available Scripts
+Generative Art の作品を自由にパラメータを調整して試すことのできる WEB ページです。
 
-In the project directory, you can run:
+<br>
 
-### `npm start`
+### 描画アルゴリズム
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1. ランダムな 3 点を頂点に設定し、三角形を描画します。
+1. それぞれの頂点には、ランダムに設定された 2 種類の速度を保持しています。
+   - 画像の中心を起点に回転する角速度
+   - 画像の中心に向かって引きつけられる速度
+1. それぞれの頂点を 2 種類の速度に従って動かした位置に、次の三角形を描画します。
+1. 全ての頂点が画像の中心に集まるまで、これらを繰り返します。
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+<br>
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<br>
 
-### `npm run build`
+## 使用ライブラリ
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- React
+- p5.js
+- chakra UI
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<br>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## ページの構成
 
-### `npm run eject`
+```
+index.js
+    └─App.js
+        ├─Canvas.jsx
+        └─Tools.jsx
+            └─CustomSlider.jsx
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- App.js
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+  - 画面レイアウトの作成
+  - レスポンシブ表示への対応（ブレイクポイント 620px）
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- Canvas.jsx
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+  - スケッチの描画
 
-## Learn More
+- Tools.jsx
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+  - スライダー、ボタンの描画
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- CustomSlider.jsx
+  - カスタマイズしたスライダーを提供
 
-### Code Splitting
+<br>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## useState の構成
 
-### Analyzing the Bundle Size
+- App.js
+  - sketchValues
+    - スケッチに渡すパラメータを管理
+- Tools.jsx
+  - strokeWeight
+    - 描画するラインの太さを保持
+  - strokeAlpha
+    - 描画するラインの濃さ（α 値）を保持
+  - fillAlpha
+    - 描画する塗り潰しの濃さ（α 値）を保持
+  - density1
+    - 図形が回転するスピードを保持
+  - density2
+    - 図形が縮小するスピードを保持
+- CustomSlider.jsx
+  - isHover
+    - スライダーにマウスがホバーしているか
+  - isPicked
+    - スライダーのつまみが掴まれているか
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+<br>
 
-### Making a Progressive Web App
+## 再レンダリングのフロー
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. スライダーの値が変更されると、 slider に tooltip で値を表示
+1. スライダーによって変更された値を対応する State に保持（更新されるのは tool.jsx のみ）
+1. ボタンが押されたときに sketchValues を更新
+1. 全体が再レンダリングされる
